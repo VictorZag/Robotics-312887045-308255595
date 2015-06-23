@@ -44,7 +44,7 @@ void saveImage(const char* filename, std::vector<unsigned char>& image, unsigned
 
 int main()
 {
-        const char* filename = "hospital_section.png";
+        const char* filename = "roboticLabMap.png";
 	loadImage(filename);
 
 	cout << "width: " << width << ", height: " << height << endl;
@@ -63,7 +63,7 @@ int main()
 		image[i + 3] = 255;
 	}
 
-	const char* newfile = "hospital_section2.png";
+	const char* newfile = "roboticLabMap2.png";
 	saveImage(newfile, image, width, height);
         
 	Robot robot("localhost", 6665);
