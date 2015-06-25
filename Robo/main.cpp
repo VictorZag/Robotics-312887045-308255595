@@ -14,6 +14,7 @@ using namespace PlayerCc;
 using namespace std;
 
 std::vector<unsigned char> image; //the raw pixels
+std::vector<unsigned char> newImage;
 unsigned width, height;
 
 
@@ -23,6 +24,7 @@ void loadImage(const char* filename)
 {
   //decode
   unsigned error = lodepng::decode(image, width, height, filename);
+  lodepng::decode(newImage, width, height, filename);
 
   //if there's an error, display it
   if(error) std::cout << "decoder error " << error << ": " << lodepng_error_text(error) << std::endl;
@@ -55,16 +57,38 @@ int main()
 	cout << endl;
 
 	//  Change the first line to black
-	for (unsigned int i = 0; i < width * 4 * 5; i+=4)
+	/*for (unsigned int i = 0; i < width * 4 * 5; i+=4)
 	{
 		image[i] = 0;
 		image[i + 1] = 0;
 		image[i + 2] = 0;
 		image[i + 3] = 255;
+	}*/
+	for (unsigned int i = 0; i < width * height * 4; i+=1)
+	{
+		newImage[i] = 255;
+	}
+        // blowBy= ((sizeofBOT/MAPrez)+1)/2
+	unsigned int blowWallBy = ((30/2.5)+1)/2;
+	for (unsigned int i = 0; i < width * height * 4; i+=4)
+	{
+		if(image[i]==0){
+			for (unsigned a=i-width*4*blowWallBy; a<=i+width*4*blowWallBy; a+=width*4)
+			{
+				for (unsigned b=a-blowWallBy*4; b<=a+blowWallBy*4; b+=4)
+				{
+					newImage[b] = 0;
+					newImage[b + 1] = 0;
+					newImage[b + 2] = 0;
+					newImage[b + 3] = 255;
+				}
+			}
+		}
+		
 	}
 
 	const char* newfile = "roboticLabMap2.png";
-	saveImage(newfile, image, width, height);
+	saveImage(newfile, newImage, width, height);
         
 	Robot robot("localhost", 6665);
 	return 0;
