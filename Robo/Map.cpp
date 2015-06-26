@@ -11,7 +11,7 @@
 
 Map::Map() {
     Parameters p ((char*)"parameters.txt");
-    loadImage((const char*)p.GetMapFilePath());
+    loadImage(p.GetMapFilePath().c_str());
     blowImage(p.GetRobotSize(),p.GetMapResolutionCM());
 }
 
@@ -22,7 +22,7 @@ Map::Map(const Map& orig) {
 Map::~Map() {
 }
 
-void loadImage(const char* filename)
+void Map::loadImage(const char* filename)
 {
   //decode
   unsigned error = lodepng::decode(_image, _width, _height, filename);
@@ -32,7 +32,7 @@ void loadImage(const char* filename)
 
   //the pixels are now in the vector "image", 4 bytes per pixel, ordered RGBARGBA..., use it as texture, draw it, ...
 }
-void saveImage(const char* filename, std::vector<unsigned char>& image, unsigned width, unsigned height)
+void Map::saveImage(const char* filename, std::vector<unsigned char>& image, unsigned width, unsigned height)
 {
   //Encode the image
   unsigned error = lodepng::encode(filename, image, width, height);
@@ -40,7 +40,7 @@ void saveImage(const char* filename, std::vector<unsigned char>& image, unsigned
   //if there's an error, display it
   if(error) std::cout << "encoder error " << error << ": "<< lodepng_error_text(error) << std::endl;
 }
-void blowImage(float robotSize, float mapResolution)
+void Map::blowImage(float robotSize, float mapResolution)
 {
     
     for (unsigned int i = 0; i < _width * _height * 4; i+=1)
@@ -69,7 +69,7 @@ void blowImage(float robotSize, float mapResolution)
 
     }
 }
-void createGrid()
+void Map::createGrid()
 {
     
 }
