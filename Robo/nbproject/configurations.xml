@@ -10,6 +10,7 @@
       <itemPath>Manager.h</itemPath>
       <itemPath>Map.h</itemPath>
       <itemPath>MoveForward.h</itemPath>
+      <itemPath>Parameters.h</itemPath>
       <itemPath>Particle.h</itemPath>
       <itemPath>PathPlanner.h</itemPath>
       <itemPath>Robot.h</itemPath>
@@ -29,6 +30,7 @@
       <itemPath>Manager.cpp</itemPath>
       <itemPath>Map.cpp</itemPath>
       <itemPath>MoveForward.cpp</itemPath>
+      <itemPath>Parameters.cpp</itemPath>
       <itemPath>Particle.cpp</itemPath>
       <itemPath>PathPlanner.cpp</itemPath>
       <itemPath>Robot.cpp</itemPath>
@@ -97,6 +99,10 @@
       </item>
       <item path="MoveForward.h" ex="false" tool="3" flavor2="0">
       </item>
+      <item path="Parameters.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="Parameters.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="Particle.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="Particle.h" ex="false" tool="3" flavor2="0">
@@ -163,6 +169,10 @@
       <item path="MoveForward.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="MoveForward.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Parameters.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="Parameters.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="Particle.cpp" ex="false" tool="1" flavor2="0">
       </item>

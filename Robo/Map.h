@@ -18,29 +18,16 @@ using namespace std;
 
 class Map {
 private:
-    std::string _mapFile;
-    float _startLocationX, _startLocationY, _startAngle;
-    float _goalLocationX, _goalLocationY;
-    float _robotSize,_mapResolutionCM,_gridResolutionCM;
+    
     unsigned _width, _height;
     vector<unsigned char> _image;
     vector< vector<int> > _grid;
     
-    // Value-Defintions of the different String values
-    enum StringValue { map,
-                        startLocation,
-                        goal,
-                        robotSize,
-                        MapResolutionCM,
-                        GridResolutionCM };
-                          
-    // Map to associate the strings with the enum values
-    std::map<std::string, StringValue> s_mapStringValues;
+
     
 public:
-    Map(char* parameters);
+    Map();
     Map(const Map& orig);
-    unsigned int str2int(const char* str, int h = 0);
     virtual ~Map();
 
 };
