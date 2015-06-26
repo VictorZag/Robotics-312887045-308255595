@@ -19,6 +19,8 @@ using namespace std;
 class Map {
 private:
     std::string _mapFile;
+    float _startLocationX, _startLocationY, _startAngle;
+    float _goalLocationX, _goalLocationY;
     float _robotSize,_mapResolutionCM,_gridResolutionCM;
     unsigned _width, _height;
     vector<unsigned char> _image;
@@ -33,7 +35,7 @@ private:
                         GridResolutionCM };
                           
     // Map to associate the strings with the enum values
-    static std::map<std::string, StringValue> s_mapStringValues;
+    std::map<std::string, StringValue> s_mapStringValues;
     
 public:
     Map(char* parameters);
