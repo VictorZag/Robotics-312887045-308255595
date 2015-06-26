@@ -70,20 +70,24 @@ int main()
 	}
         // blowBy= ((sizeofBOT/MAPrez)+1)/2
 	unsigned int blowWallBy = ((30/2.5)+1)/2;
-	for (unsigned int i = 0; i < width * height * 4; i+=4)
+        for (unsigned int i = 0; i < height; i++)
 	{
-		if(image[i]==0){
-			for (unsigned a=i-width*4*blowWallBy; a<=i+width*4*blowWallBy; a+=width*4)
-			{
-				for (unsigned b=a-blowWallBy*4; b<=a+blowWallBy*4; b+=4)
-				{
-					newImage[b] = 0;
-					newImage[b + 1] = 0;
-					newImage[b + 2] = 0;
-					newImage[b + 3] = 255;
-				}
-			}
+            for (unsigned int j = 0; j < width; j++)
+            {
+		if(image[((i*width)+j)*4]==0)
+                {
+                    for(unsigned int a = std::max((unsigned int)0,i-blowWallBy); a <= std::min(height-1,i+blowWallBy) ; a++)
+                    {
+                        for(unsigned int b = std::max((unsigned int)0,j-blowWallBy); b <= std::min(width-1,j+blowWallBy) ; b++)
+                        {
+                            newImage[((a*width)+b)*4] = 0;
+                            newImage[((a*width)+b)*4 + 1] = 0;
+                            newImage[((a*width)+b)*4 + 2] = 0;
+                            newImage[((a*width)+b)*4 + 3] = 255;
+                        }
+                    }
 		}
+            }
 		
 	}
 
