@@ -10,7 +10,7 @@
 
 
 Map::Map() {
-    Parameters p = new Parameters((char*)"parameters.txt");
+    Parameters p ((char*)"parameters.txt");
     loadImage((const char*)p.GetMapFilePath());
     blowImage(p.GetRobotSize(),p.GetMapResolutionCM());
 }
