@@ -38,6 +38,7 @@ OBJECTFILES= \
 	${OBJECTDIR}/Behavior.o \
 	${OBJECTDIR}/ConfigurationManager.o \
 	${OBJECTDIR}/LocalizationManager.o \
+	${OBJECTDIR}/Manager.o \
 	${OBJECTDIR}/Map.o \
 	${OBJECTDIR}/MoveForward.o \
 	${OBJECTDIR}/Particle.o \
@@ -86,6 +87,11 @@ ${OBJECTDIR}/LocalizationManager.o: LocalizationManager.cpp
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
 	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/LocalizationManager.o LocalizationManager.cpp
+
+${OBJECTDIR}/Manager.o: Manager.cpp 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} "$@.d"
+	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Manager.o Manager.cpp
 
 ${OBJECTDIR}/Map.o: Map.cpp 
 	${MKDIR} -p ${OBJECTDIR}
