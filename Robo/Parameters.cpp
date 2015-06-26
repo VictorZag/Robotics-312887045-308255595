@@ -16,10 +16,13 @@ Parameters::Parameters(char* p_filePath) {
     s_mapStringValues["robotSize"] = robotSize;
     s_mapStringValues["MapResolutionCM"] = MapResolutionCM;
     s_mapStringValues["GridResolutionCM"] = GridResolutionCM;
-    
+    size_t endpos;
     ifstream myfile(p_filePath);
-    string line, propery;
-        int startPos = 0;                
+    string line, propery,temp;
+    int found, counter = 0;
+    float robotLentgh, robotWidth;
+    stringstream ssLocation,ssGoal,ssrobotSize;
+    int startPos = 0;                
     int spacePos = 0;
     
     while (getline(myfile, line))
@@ -31,17 +34,65 @@ Parameters::Parameters(char* p_filePath) {
             switch (s_mapStringValues[propery])
             {
                 case (map):
-                    _mapFile = line.substr( pos + 1);
+                    endpos = line.find_last_not_of("\r");
+                    if( string::npos != endpos )
+                    {
+                        _mapFile = line.substr(pos + 1, endpos -3 );
+                    }
+                    break;
+                case (startLocation):
+                    counter = 0;
+                    ssLocation << line;
+                    while(std::getline(ssLocation, temp,' ')) {
+                        
+                        if(std::stringstream(temp)>>found)
+                        {
+                            if (counter == 0)
+                                _startLocationX = (float)found;
+                             if (counter == 1)
+                                _startLocationY = (float)found;
+                             if (counter == 2)
+                                _startAngle = (float)found;
+                            
+                            counter++;
+                        }
+                    }
+                        
                     break;
                     
+                case (goal):
+                    counter = 0;
+                    ssGoal << line;
+                    while(std::getline(ssGoal, temp,' ')) {
+                        
+                        if(std::stringstream(temp)>>found)
+                        {
+                            if (counter == 0)
+                                _goalLocationX = (float)found;
+                             if (counter == 1)
+                                _goalLocationY = (float)found;
+                            
+                            counter++;
+                        }
+                    }
+                    break;
                 case (robotSize):
-                    startPos = 0;      
-                    spacePos = 0;
-                    while (spacePos = 0)
-                        startPos = spacePos + 1;
-                        spacePos = line.find(' ');
-                    _robotSize = max((float)(atof(line.substr(startPos, spacePos - 1).c_str())),
-                                        (float)atof(line.substr( spacePos + 1).c_str())) ;
+                    counter = 0;
+                    ssrobotSize << line;
+                    while(std::getline(ssrobotSize, temp,' ')) {
+                        
+                        if(std::stringstream(temp)>>found)
+                        {
+                            if (counter == 0)
+                                robotLentgh = (float)found;
+                             if (counter == 1)
+                                robotWidth = (float)found;
+                            counter++;
+                        }
+                    }
+
+                    _robotSize = max(robotLentgh, robotWidth);
+                    
                     break;
                 case (MapResolutionCM):
                     _mapResolutionCM = (float)(atof(line.substr( pos + 1).c_str()));
