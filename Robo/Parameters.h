@@ -22,9 +22,19 @@ public:
     Parameters(char* p_filePath);
     Parameters(const Parameters& orig);
     virtual ~Parameters();
+    
+    string GetMapFilePath();
+    float GetStartLocationX();
+    float GetStartLocationY();
+    float GetStartAngle();
+    float GetGoalLocationX();
+    float GetGoalLocationY();
+    float GetRobotSize();
+    float GetMapResolutionCM();
+    float GetGridResolutionCM();
 private:
     
-    std::string _mapFile;
+    string _mapFile;
     float _startLocationX, _startLocationY, _startAngle;
     float _goalLocationX, _goalLocationY;
     float _robotSize,_mapResolutionCM,_gridResolutionCM;

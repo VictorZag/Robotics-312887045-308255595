@@ -7,6 +7,8 @@
 
 #include "Parameters.h"
 
+
+
 Parameters::Parameters(char* p_filePath) {
     s_mapStringValues["map"] = map;
     s_mapStringValues["startLocation"] = startLocation;
@@ -25,7 +27,7 @@ Parameters::Parameters(char* p_filePath) {
         unsigned pos = line.find(':');
         if (pos != string::npos)
         {
-            propery = line.substr(0, pos - 1);
+            propery = line.substr(0, pos);
             switch (s_mapStringValues[propery])
             {
                 case (map):
@@ -54,11 +56,24 @@ Parameters::Parameters(char* p_filePath) {
             }
         }
     }
-}
+    }
+
+
 
 Parameters::Parameters(const Parameters& orig) {
 }
 
 Parameters::~Parameters() {
 }
+
+string Parameters::GetMapFilePath(){return _mapFile;}
+float Parameters::GetStartLocationX(){return _startLocationX;}
+float Parameters::GetStartLocationY(){return _startLocationY;}
+float Parameters::GetStartAngle(){return _startAngle;}
+float Parameters::GetGoalLocationX(){return _goalLocationX;}
+float Parameters::GetGoalLocationY(){return _goalLocationY;}
+float Parameters::GetRobotSize(){return _robotSize;}
+float Parameters::GetMapResolutionCM(){return _mapResolutionCM;}
+float Parameters::GetGridResolutionCM(){return _gridResolutionCM;}
+
 
