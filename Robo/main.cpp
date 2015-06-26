@@ -24,7 +24,6 @@ void loadImage(const char* filename)
 {
   //decode
   unsigned error = lodepng::decode(image, width, height, filename);
-  lodepng::decode(newImage, width, height, filename);
 
   //if there's an error, display it
   if(error) std::cout << "decoder error " << error << ": " << lodepng_error_text(error) << std::endl;
@@ -66,7 +65,7 @@ int main()
 	}*/
 	for (unsigned int i = 0; i < width * height * 4; i+=1)
 	{
-		newImage[i] = 255;
+            newImage.push_back((unsigned char)255);
 	}
         // blowBy= ((sizeofBOT/MAPrez)+1)/2
 	unsigned int blowWallBy = ((30/2.5)+1)/2;

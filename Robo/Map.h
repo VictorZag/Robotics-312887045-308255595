@@ -7,13 +7,18 @@
 
 #ifndef MAP_H
 #define	MAP_H
+#include <vector>
 
 class Map {
+private:
+    char* _mapSource;
+    float _mapResolutionCM,_gridResolutionCM;
+    unsigned _width, _height;
+    vector<unsigned char> _image;
 public:
     Map();
     Map(const Map& orig);
     virtual ~Map();
-private:
 
 };
 
