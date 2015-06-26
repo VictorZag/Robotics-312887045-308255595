@@ -36,8 +36,14 @@ OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 # Object Files
 OBJECTFILES= \
 	${OBJECTDIR}/Behavior.o \
+	${OBJECTDIR}/ConfigurationManager.o \
+	${OBJECTDIR}/LocalizationManager.o \
+	${OBJECTDIR}/Map.o \
 	${OBJECTDIR}/MoveForward.o \
+	${OBJECTDIR}/Particle.o \
+	${OBJECTDIR}/PathPlanner.o \
 	${OBJECTDIR}/Robot.o \
+	${OBJECTDIR}/WaypointsManager.o \
 	${OBJECTDIR}/lodepng.o \
 	${OBJECTDIR}/main.o
 
@@ -71,15 +77,45 @@ ${OBJECTDIR}/Behavior.o: Behavior.cpp
 	${RM} "$@.d"
 	$(COMPILE.cc) -g -I/usr/local/include/player-2.0 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Behavior.o Behavior.cpp
 
+${OBJECTDIR}/ConfigurationManager.o: ConfigurationManager.cpp 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} "$@.d"
+	$(COMPILE.cc) -g -I/usr/local/include/player-2.0 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/ConfigurationManager.o ConfigurationManager.cpp
+
+${OBJECTDIR}/LocalizationManager.o: LocalizationManager.cpp 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} "$@.d"
+	$(COMPILE.cc) -g -I/usr/local/include/player-2.0 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/LocalizationManager.o LocalizationManager.cpp
+
+${OBJECTDIR}/Map.o: Map.cpp 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} "$@.d"
+	$(COMPILE.cc) -g -I/usr/local/include/player-2.0 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Map.o Map.cpp
+
 ${OBJECTDIR}/MoveForward.o: MoveForward.cpp 
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
 	$(COMPILE.cc) -g -I/usr/local/include/player-2.0 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/MoveForward.o MoveForward.cpp
 
+${OBJECTDIR}/Particle.o: Particle.cpp 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} "$@.d"
+	$(COMPILE.cc) -g -I/usr/local/include/player-2.0 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Particle.o Particle.cpp
+
+${OBJECTDIR}/PathPlanner.o: PathPlanner.cpp 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} "$@.d"
+	$(COMPILE.cc) -g -I/usr/local/include/player-2.0 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/PathPlanner.o PathPlanner.cpp
+
 ${OBJECTDIR}/Robot.o: Robot.cpp 
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
 	$(COMPILE.cc) -g -I/usr/local/include/player-2.0 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Robot.o Robot.cpp
+
+${OBJECTDIR}/WaypointsManager.o: WaypointsManager.cpp 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} "$@.d"
+	$(COMPILE.cc) -g -I/usr/local/include/player-2.0 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/WaypointsManager.o WaypointsManager.cpp
 
 ${OBJECTDIR}/lodepng.o: lodepng.cpp 
 	${MKDIR} -p ${OBJECTDIR}
