@@ -6,10 +6,12 @@
  */
 
 #include "Map.h"
+#include "Parameters.h"
 
 
 
 Map::Map() {
+    Parameters 
     loadImage(Parameters.GetMapFilePath());
     blowImage();
 }
