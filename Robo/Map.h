@@ -14,7 +14,7 @@
 #include <string>
 #include <map>
 #include "lodepng.h"
-#include "Parameters.h"
+#include "ConfigurationManager.h"
 
 using namespace std;
 

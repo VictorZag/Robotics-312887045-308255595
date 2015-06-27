@@ -6,16 +6,13 @@
  */
 
 #include "Map.h"
-#include "Parameters.h"
 
 
 Map::Map(char* p_filePath) {
-    Parameters p (p_filePath);
-    loadImage(p.GetMapFilePath().c_str());
-    blowImage(p.GetRobotSize(),p.GetMapResolutionCM());
-    const char* newfile = "robo_section2.png";
-    saveImage(newfile, _blownImage, _width, _height);
-    createGrid(p.GetMapResolutionCM(),p.GetGridResolutionCM());
+    ConfigurationManager cm (p_filePath);
+    loadImage(cm.GetMapFilePath().c_str());
+    blowImage(cm.GetRobotSize(),cm.GetMapResolutionCM());
+    createGrid(cm.GetMapResolutionCM(),cm.GetGridResolutionCM());
 }
 
 Map::Map(const Map& orig) {
