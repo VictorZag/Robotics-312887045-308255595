@@ -8,10 +8,10 @@
 #include "Map.h"
 
 
-
 Map::Map() {
-    loadImage(Parameters.GetMapFilePath());
-    blowImage();
+    Parameters p = new Parameters((char*)"parameters.txt");
+    loadImage(p.GetMapFilePath());
+    blowImage(p.GetRobotSize(),p.GetMapResolutionCM());
 }
 
 Map::Map(const Map& orig) {
@@ -39,14 +39,14 @@ void saveImage(const char* filename, std::vector<unsigned char>& image, unsigned
   //if there's an error, display it
   if(error) std::cout << "encoder error " << error << ": "<< lodepng_error_text(error) << std::endl;
 }
-void blowImage()
+void blowImage(float robotSize, float mapResolution)
 {
     
     for (unsigned int i = 0; i < _width * _height * 4; i+=1)
     {
        _blownImage.push_back((unsigned char)255);
     }
-    unsigned int blowWallBy = ((Parameters.GetRobotSize()/Parameters.GetMapResolutionCM()) + 1) / 2;
+    unsigned int blowWallBy = ((robotSize/mapResolution) + 1) / 2;
     for (unsigned int i = 0; i < _height; i++)
     {
         for (unsigned int j = 0; j < _width; j++)
