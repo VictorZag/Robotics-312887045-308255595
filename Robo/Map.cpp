@@ -9,10 +9,13 @@
 #include "Parameters.h"
 
 
-Map::Map() {
-    Parameters p ((char*)"parameters.txt");
+Map::Map(char* p_filePath) {
+    Parameters p (p_filePath);
     loadImage(p.GetMapFilePath().c_str());
     blowImage(p.GetRobotSize(),p.GetMapResolutionCM());
+    const char* newfile = "robo_section2.png";
+    saveImage(newfile, _blownImage, _width, _height);
+    createGrid(p.GetMapResolutionCM(),p.GetGridResolutionCM());
 }
 
 Map::Map(const Map& orig) {
@@ -69,7 +72,29 @@ void Map::blowImage(float robotSize, float mapResolution)
 
     }
 }
-void Map::createGrid()
+void Map::createGrid(float mapResolution, float gridResolution)
 {
-    
+    float gridResolutionPix = gridResolution / mapResolution;
+    int rows = _height / gridResolutionPix;
+    int cols = _width / gridResolutionPix;
+    for (unsigned int r=0; r<rows; r++)
+    {
+        vector<int> gridRow(cols);
+        for (unsigned int c=0; c<cols; c++)
+        {
+            int occupied = 0;
+            for (unsigned int ir=r*gridResolutionPix; ir<(r+1)*gridResolutionPix && occupied == 0; ir++)
+            {
+                for (unsigned int ic=c*gridResolutionPix; ic<(c+1)*gridResolutionPix && occupied == 0; ic++)
+                {
+                    if(_blownImage[((ir*_width)+ic)*4] == 0)
+                    {
+                        occupied = 1;
+                    }
+                }            
+            }
+            gridRow.push_back(occupied);
+        }
+        _grid.push_back(gridRow);
+    }
 }

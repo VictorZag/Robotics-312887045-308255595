@@ -26,15 +26,15 @@ private:
     vector<unsigned char> _blownImage;
     vector< vector<int> > _grid;
     
-            void loadImage(const char* filename);
+    void loadImage(const char* filename);
     void saveImage(const char* filename, std::vector<unsigned char>& image, unsigned width, unsigned height);
     void blowImage(float robotSize, float mapResolution);
-    void createGrid();
+    void createGrid(float mapResolution, float gridResolution);
     
 
     
 public:
-    Map();
+    Map(char* p_filePath);
     Map(const Map& orig);
     virtual ~Map();
     
