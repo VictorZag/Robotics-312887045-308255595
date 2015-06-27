@@ -9,10 +9,12 @@
 #define	MAP_H
 #include <stdlib.h>
 #include <vector>
-#include<fstream>
+#include <fstream>
 #include <iostream>
 #include <string>
 #include <map>
+#include "lodepng.h"
+#include "Parameters.h"
 
 using namespace std;
 
@@ -21,9 +23,13 @@ private:
     
     unsigned _width, _height;
     vector<unsigned char> _image;
+    vector<unsigned char> _blownImage;
     vector< vector<int> > _grid;
     
-
+    void loadImage(const char* filename);
+    void saveImage(const char* filename, std::vector<unsigned char>& image, unsigned width, unsigned height);
+    void blowImage();
+    void createGrid();
     
 public:
     Map();
