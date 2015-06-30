@@ -41,7 +41,6 @@ OBJECTFILES= \
 	${OBJECTDIR}/Manager.o \
 	${OBJECTDIR}/Map.o \
 	${OBJECTDIR}/MoveForward.o \
-	${OBJECTDIR}/Parameters.o \
 	${OBJECTDIR}/Particle.o \
 	${OBJECTDIR}/PathPlanner.o \
 	${OBJECTDIR}/Robot.o \
@@ -103,11 +102,6 @@ ${OBJECTDIR}/MoveForward.o: MoveForward.cpp
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
 	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/MoveForward.o MoveForward.cpp
-
-${OBJECTDIR}/Parameters.o: Parameters.cpp 
-	${MKDIR} -p ${OBJECTDIR}
-	${RM} "$@.d"
-	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Parameters.o Parameters.cpp
 
 ${OBJECTDIR}/Particle.o: Particle.cpp 
 	${MKDIR} -p ${OBJECTDIR}
