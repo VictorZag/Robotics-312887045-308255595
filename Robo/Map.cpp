@@ -9,74 +9,19 @@
 
 
 Map::Map(char* p_filePath) {
-    ConfigurationManager cm (p_filePath);
+    _cm = new ConfigurationManager(p_filePath);
     loadImage("roboticLabMap.png");
-    blowImage(cm.GetRobotSize(),cm.GetMapResolutionCM());
-    float gridResolutionPix = cm.GetGridResolutionCM() / cm.GetMapResolutionCM();
-    createGrid(gridResolutionPix);
-//    for (int i =0; i<_grid.size();i++)
-//    {
-//        for(int j =0; j<_grid[0].size();j++)
-//        {
-//            for (int a =i*4; a<(i+1)*4;a++)
-//            {
-//                for (int b =j*4; b<(j+1)*4;b++)
-//                {
-//                    if (_grid[i][j] == 1)
-//                    {
-//                        _blownImage[((a*_width)+b)*4]=0;
-//                        _blownImage[((a*_width)+b)*4+1]=0;
-//                        _blownImage[((a*_width)+b)*4+2]=0;
-//                        _blownImage[((a*_width)+b)*4+3]=255;
-//                    }
-//                }
-//            }
-//        }
-//    }
-    
-    GridNode* goalNode;
-    goalNode = aStar(cm.GetGridResolutionCM(), floor(cm.GetStartLocationY()/gridResolutionPix), floor(cm.GetStartLocationX()/gridResolutionPix), floor(cm.GetGoalLocationY()/gridResolutionPix), floor(cm.GetGoalLocationX()/gridResolutionPix));
-    std::cout << "------------------";
-    while (goalNode->place.x!=floor(cm.GetStartLocationY()/gridResolutionPix) || goalNode->place.y!=floor(cm.GetStartLocationX()/gridResolutionPix))
-    {
-        std::cout << goalNode->place.x << " " << goalNode->place.y << "\n";
-        for (int a =goalNode->place.x*4; a<(goalNode->place.x+1)*4;a++)
-            {
-                for (int b =goalNode->place.y*4; b<(goalNode->place.y+1)*4;b++)
-                {
-                    _image[((a*_width)+b)*4]=0;
-                    _image[((a*_width)+b)*4+1]=0;
-                    _image[((a*_width)+b)*4+2]=255;
-                    _image[((a*_width)+b)*4+3]=255;
-                }
-            }
-        goalNode = goalNode->parent;
-    }
-    for (int a =cm.GetStartLocationY(); a<(cm.GetStartLocationY()+4);a++)
-            {
-                for (int b =cm.GetStartLocationX(); b<(cm.GetStartLocationX()+4);b++)
-                {
-                    _image[((a*_width)+b)*4]=0;
-                    _image[((a*_width)+b)*4+1]=255;
-                    _image[((a*_width)+b)*4+2]=0;
-                    _image[((a*_width)+b)*4+3]=255;
-                }
-            }
-    for (int a =cm.GetGoalLocationY(); a<(cm.GetGoalLocationY()+4);a++)
-            {
-                for (int b =cm.GetGoalLocationX(); b<(cm.GetGoalLocationX()+4);b++)
-                {
-                    _image[((a*_width)+b)*4]=255;
-                    _image[((a*_width)+b)*4+1]=0;
-                    _image[((a*_width)+b)*4+2]=0;
-                    _image[((a*_width)+b)*4+3]=255;
-                }
-            }
-    saveImage("test1.png",_image,_width,_height);
+    blowImage(_cm->GetRobotSize(),_cm->GetMapResolutionCM());
+    createGrid(getGridResolutionPix());
 }
 
 Map::Map(const Map& orig) {
-   
+   _blownImage = orig._blownImage;
+   _cm = orig._cm;
+   _grid = orig._grid;
+   _height = orig._height;
+   _width = orig._width;
+   _image = orig._image;
 }
 
 Map::~Map() {
@@ -154,115 +99,43 @@ void Map::createGrid(float gridResolutionPix)
         _grid.push_back(gridRow);
     }
 }
-float Map::heuristic_cost_estimate(Location start, Location goal)
+unsigned Map::getWidth()
 {
-    float dx = start.x-goal.x;
-    float dy = start.y-goal.y;
-    return sqrt(dx * dx + dy * dy);
+    return _width;
 }
-int Map::minGScoreL(vector<GridNode*> open)
+unsigned Map::getHeight()
 {
-    float minG=open[0]->g_score;
-    int minI=0;
-    for(int i = 1; i < open.size(); i++)
-    {
-        if(open[i]->g_score < minG)
-        {
-            minI = i;
-            minG = open[i]->g_score;
-        }
-    }
-    return minI;
+    return _height;
 }
-int Map::getNodeByL(vector<GridNode*> open,unsigned int nx, unsigned int ny)
+vector<unsigned char> Map::getImage()
 {
-    for(int i = 1; i < open.size(); i++)
-    {
-        if(open[i]->place.x == nx && open[i]->place.y == ny)
-        {
-            return i;
-        }
-    }
+    return _image;
 }
-GridNode* Map::aStar(float gridResolution, float startX, float startY, float goalX, float goalY)
+vector< vector<int> > Map::getGrid()
 {
-    Location goal;
-    goal.x=goalX;
-    goal.y=goalY;
-    unsigned int rows = _grid.size();
-    unsigned int cols = _grid[0].size();
-    int dontCheck[rows][cols];
-    float gCheck[rows][cols];
-    for (unsigned int r=0; r<rows; r++)
-    {
-        for (unsigned int c=0; c<cols; c++)
-        {
-            dontCheck[r][c] = _grid[r][c];
-            gCheck[r][c] = -1;
-            if (_grid[r][c] == 1)
-            {
-                std::cout << r << " " << c << "\n";
-            }
-        }
-    }
-    GridNode* startNode = new GridNode;;
-    startNode->place.x=startX;
-    startNode->place.y=startY;
-    startNode->t_score=0;
-    startNode->g_score=heuristic_cost_estimate(startNode->place,goal);
-    gCheck[(int)startX][(int)startY] = startNode->g_score;
-    vector<GridNode*> openSet;
-    openSet.push_back(startNode);
-    while(!openSet.empty())
-    {
-        int minGLocation = minGScoreL(openSet);
-        GridNode* current = openSet[minGLocation];
-        openSet.erase(openSet.begin()+minGLocation);
-        dontCheck[current->place.x][current->place.y]=1;
-        for (unsigned int neighborX=std::max((unsigned int)0,current->place.x-1);neighborX<=std::min(current->place.x+1,rows-1);neighborX++)
-        {
-            for (unsigned int neighborY=std::max((unsigned int)0,current->place.y-1);neighborY<=std::min(current->place.y+1,cols-1);neighborY++)
-            {
-                if(dontCheck[neighborX][neighborY] == 0)
-                {
-                    GridNode* neighbor = new GridNode;
-                    neighbor->parent=current;
-                    neighbor->place.x=neighborX;
-                    neighbor->place.y=neighborY;
-                    if(neighborX == goalX && neighborY == goalY)
-                    {
-                        return neighbor;
-                    }
-                    neighbor->t_score=current->t_score;
-                    if(neighborX==current->place.x || neighborY==current->place.y)
-                    {
-                        neighbor->t_score+=gridResolution;
-                    }
-                    else
-                    {
-                        neighbor->t_score+=sqrt(gridResolution*gridResolution*2);
-                    }
-                    neighbor->g_score=neighbor->t_score+heuristic_cost_estimate(neighbor->place,goal);
-                    if(gCheck[neighborX][neighborY] == -1)
-                    {
-                        gCheck[neighborX][neighborY] = neighbor->g_score;
-                        openSet.push_back(neighbor);
-                    }
-                    else if (neighbor->g_score < gCheck[neighborX][neighborY])
-                    {
-                        gCheck[neighborX][neighborY] = neighbor->g_score;
-                        int existingNodeI = getNodeByL(openSet,neighborX,neighborY);
-                        openSet[existingNodeI]->t_score = neighbor->t_score;
-                        openSet[existingNodeI]->g_score = neighbor->g_score;
-                        openSet[existingNodeI]->parent = neighbor->parent;
-                                
-                    }
-                }
-            }
-        }
-        
-        
-    }
-//    return &startNode;
+    return _grid;
 }
-
+float Map::getGridResolutionPix()
+{
+    return _cm->GetGridResolutionCM() / _cm->GetMapResolutionCM();
+}
+float Map::geGridResolution()
+{
+    return _cm->GetGridResolutionCM();
+}
+float Map::getStartLocationX()
+{
+    return _cm->GetStartLocationX();
+}
+float Map::getStartLocationY()
+{
+    return _cm->GetStartLocationY();
+}
+float Map::getGoalLocationX()
+{
+    return _cm->GetGoalLocationX();
+}
+float Map::getGoalLocationY()
+{
+    return _cm->GetGoalLocationY();
+}

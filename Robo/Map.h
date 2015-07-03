@@ -17,22 +17,6 @@
 
 using namespace std;
 
-class Location
-{
-public:
-    unsigned int x;
-    unsigned int y;
-};
-
-class GridNode
-{
-public:
-    Location place;
-    float t_score;
-    float g_score;
-    GridNode* parent;
-};
-
 class Map {
 private:
     
@@ -40,24 +24,28 @@ private:
     vector<unsigned char> _image;
     vector<unsigned char> _blownImage;
     vector< vector<int> > _grid;
+    ConfigurationManager* _cm;
     
     void loadImage(const char* filename);
-    void saveImage(const char* filename, std::vector<unsigned char>& image, unsigned width, unsigned height);
     void blowImage(float robotSize, float mapResolution);
     void createGrid(float gridResolutionPix);
-    float heuristic_cost_estimate(Location start, Location goal);
-    int minGScoreL(vector<GridNode*> open);
-    int getNodeByL(vector<GridNode*> open,unsigned int nx, unsigned int ny);
-    GridNode* aStar(float gridResolution, float startX, float startY, float goalX, float goalY);    
-
+    
     
 public:
     Map(char* p_filePath);
     Map(const Map& orig);
     virtual ~Map();
-    
-
-
+    void saveImage(const char* filename, std::vector<unsigned char>& image ,unsigned width, unsigned height);
+    unsigned getWidth();
+    unsigned getHeight();
+    vector<unsigned char> getImage();
+    vector< vector<int> > getGrid();
+    float getGridResolutionPix();
+    float geGridResolution();
+    float getStartLocationX();
+    float getStartLocationY();
+    float getGoalLocationX();
+    float getGoalLocationY();
 };
 
 #endif	/* MAP_H */
