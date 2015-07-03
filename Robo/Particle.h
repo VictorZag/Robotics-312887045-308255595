@@ -13,7 +13,22 @@ public:
     Particle();
     Particle(const Particle& orig);
     virtual ~Particle();
+    
+    void Update(long deltaX, long deltaY, long deltaYaw, float* laserArr);
+    
+    long ProbByMeasurement();
+    
+    long GetBelief();
+    
 private:
+    
+    long _x;
+    long _y;
+    long _yaw;
+    
+    long _belief;
+    
+    long ProbByMove(long deltaX, long deltaY, long deltaYaw);
 
 };
 

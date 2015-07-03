@@ -8,12 +8,27 @@
 #ifndef LOCALIZATIONMANAGER_H
 #define	LOCALIZATIONMANAGER_H
 
+#define PART_COUNT 200
+
+#include <vector>
+#include <queue>
+
+#include "Particle.h"
+
+using namespace std;
+
 class LocalizationManager {
 public:
     LocalizationManager();
     LocalizationManager(const LocalizationManager& orig);
     virtual ~LocalizationManager();
+    
+    void Update(long deltaX, long deltaY, long deltaYaw, float* laserArr);
 private:
+    
+    /*Particle _particles[PART_COUNT];*/
+    vector<Particle> _particles;
+    
 
 };
 
