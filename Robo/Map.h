@@ -27,7 +27,9 @@ private:
     ConfigurationManager* _cm;
     
     void loadImage(const char* filename);
+    //blow the walls and obstacles on the map by about half the size of the robot
     void blowImage(float robotSize, float mapResolution);
+    //fill the _grid with 1 where there is black on the blown map to represent not passable and 0 where there is white to represent passable
     void createGrid(float gridResolutionPix);
     
     

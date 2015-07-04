@@ -10,9 +10,16 @@
             <file>file:/home/colman/NetBeansProjects/Robotics-308255595-312887045/Robo/Map.cpp</file>
             <file>file:/home/colman/NetBeansProjects/Robotics-308255595-312887045/Robo/ConfigurationManager.h</file>
             <file>file:/home/colman/NetBeansProjects/Robotics-308255595-312887045/Robo/parameters.txt</file>
+            <file>file:/home/colman/NetBeansProjects/Robotics-308255595-312887045/Robo/Particle.h</file>
+            <file>file:/home/colman/NetBeansProjects/Robotics-308255595-312887045/Robo/PathPlanner.h</file>
             <file>file:/home/colman/NetBeansProjects/Robotics-308255595-312887045/Robo/ConfigurationManager.cpp</file>
+            <file>file:/home/colman/NetBeansProjects/Robotics-308255595-312887045/Robo/PathPlanner.cpp</file>
+            <file>file:/home/colman/NetBeansProjects/Robotics-308255595-312887045/Robo/MapWithPath.png</file>
+            <file>file:/home/colman/NetBeansProjects/Robotics-308255595-312887045/Robo/roboticLabMap.png</file>
             <file>file:/home/colman/NetBeansProjects/Robotics-308255595-312887045/Robo/Map.h</file>
             <file>file:/home/colman/NetBeansProjects/Robotics-308255595-312887045/Robo/main.cpp</file>
+            <file>file:/home/colman/NetBeansProjects/Robotics-308255595-312887045/Robo/roboticLabMap2.png</file>
+            <file>file:/home/colman/NetBeansProjects/Robotics-308255595-312887045/Robo/MoveForward.cpp</file>
         </group>
     </open-files>
 </project-private>

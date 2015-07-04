@@ -18,10 +18,10 @@ PathPlanner::PathPlanner(const PathPlanner& orig) {
 PathPlanner::~PathPlanner() {
 }
 
-float PathPlanner::heuristic_cost_estimate(Location start, Location goal)
+float PathPlanner::heuristic_cost_estimate(Location cur, Location goal)
 {
-    float dx = start.x-goal.x;
-    float dy = start.y-goal.y;
+    float dx = cur.x-goal.x;
+    float dy = cur.y-goal.y;
     return sqrt(dx * dx + dy * dy);
 }
 int PathPlanner::minGScoreL(vector<GridNode*> open)
@@ -61,7 +61,24 @@ GridNode* PathPlanner::aStar(vector< vector<int> > grid, float gridResolution, f
     {
         for (unsigned int c=0; c<cols; c++)
         {
-            dontCheck[r][c] = grid[r][c];
+            if (grid[r][c] == 1)
+            {
+                dontCheck[r][c] = 1;
+                for (int i=max((unsigned int)0,r-1); i<=min(r+1,rows-1); i++)
+                {
+                    for (int j=max((unsigned int)0,c-1); j<=min(c+1,cols-1); j++)
+                    {
+                        if (grid[i][j] == 0)
+                        {
+                            dontCheck[i][j] = 2;
+                        }
+                    }
+                }
+            }
+            else if (dontCheck[r][c] != 2)
+            {
+                dontCheck[r][c] = 0;
+            }
             gCheck[r][c] = -1;
         }
     }
@@ -83,7 +100,7 @@ GridNode* PathPlanner::aStar(vector< vector<int> > grid, float gridResolution, f
         {
             for (unsigned int neighborX=std::max((unsigned int)0,current->place.x-1);neighborX<=std::min(current->place.x+1,cols-1);neighborX++)
             {
-                if(dontCheck[neighborY][neighborX] == 0)
+                if(dontCheck[neighborY][neighborX] != 1)
                 {
                     GridNode* neighbor = new GridNode;
                     neighbor->parent=current;
@@ -101,6 +118,10 @@ GridNode* PathPlanner::aStar(vector< vector<int> > grid, float gridResolution, f
                     else
                     {
                         neighbor->t_score+=sqrt(gridResolution*gridResolution*2);
+                    }
+                    if (dontCheck[neighborY][neighborX] == 2)
+                    {
+                        neighbor->t_score+=(gridResolution/2);
                     }
                     neighbor->g_score=neighbor->t_score+heuristic_cost_estimate(neighbor->place,goal);
                     if(gCheck[neighborY][neighborX] == -1)
