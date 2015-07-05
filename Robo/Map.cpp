@@ -10,7 +10,7 @@
 
 Map::Map(char* p_filePath) {
     _cm = new ConfigurationManager(p_filePath);
-    loadImage("roboticLabMap.png");
+    loadImage(_cm->GetMapFilePath().c_str());
     blowImage(_cm->GetRobotSize(),_cm->GetMapResolutionCM());
     createGrid(getGridResolutionPix());
 }

@@ -8,8 +8,8 @@
 #include "PathPlanner.h"
 
 PathPlanner::PathPlanner(Map m) {
-    GridNode* goalNode = aStar(m.getGrid(), m.geGridResolution(), floor(m.getStartLocationX()/m.getGridResolutionPix()), floor(m.getStartLocationY()/m.getGridResolutionPix()), floor(m.getGoalLocationX()/m.getGridResolutionPix()), floor(m.getGoalLocationY()/m.getGridResolutionPix()));
-    painPath(m, goalNode);
+    _goalNode = aStar(m.getGrid(), m.geGridResolution(), floor(m.getStartLocationX()/m.getGridResolutionPix()), floor(m.getStartLocationY()/m.getGridResolutionPix()), floor(m.getGoalLocationX()/m.getGridResolutionPix()), floor(m.getGoalLocationY()/m.getGridResolutionPix()));
+    painPath(m, _goalNode);
 }
 
 PathPlanner::PathPlanner(const PathPlanner& orig) {
@@ -55,7 +55,7 @@ GridNode* PathPlanner::aStar(vector< vector<int> > grid, float gridResolution, f
     goal.y=goalY;
     unsigned int rows = grid.size();
     unsigned int cols = grid[0].size();
-    int dontCheck[rows][cols];
+    int wallStatus[rows][cols];
     float gCheck[rows][cols];
     for (unsigned int r=0; r<rows; r++)
     {
@@ -63,21 +63,21 @@ GridNode* PathPlanner::aStar(vector< vector<int> > grid, float gridResolution, f
         {
             if (grid[r][c] == 1)
             {
-                dontCheck[r][c] = 1;
+                wallStatus[r][c] = 1;
                 for (int i=max((unsigned int)0,r-1); i<=min(r+1,rows-1); i++)
                 {
                     for (int j=max((unsigned int)0,c-1); j<=min(c+1,cols-1); j++)
                     {
                         if (grid[i][j] == 0)
                         {
-                            dontCheck[i][j] = 2;
+                            wallStatus[i][j] = 2;
                         }
                     }
                 }
             }
-            else if (dontCheck[r][c] != 2)
+            else if (wallStatus[r][c] != 2)
             {
-                dontCheck[r][c] = 0;
+                wallStatus[r][c] = 0;
             }
             gCheck[r][c] = -1;
         }
@@ -95,12 +95,12 @@ GridNode* PathPlanner::aStar(vector< vector<int> > grid, float gridResolution, f
         int minGLocation = minGScoreL(openSet);
         GridNode* current = openSet[minGLocation];
         openSet.erase(openSet.begin()+minGLocation);
-        dontCheck[current->place.y][current->place.x]=1;
+        wallStatus[current->place.y][current->place.x]=1;
         for (unsigned int neighborY=std::max((unsigned int)0,current->place.y-1);neighborY<=std::min(current->place.y+1,rows-1);neighborY++)
         {
             for (unsigned int neighborX=std::max((unsigned int)0,current->place.x-1);neighborX<=std::min(current->place.x+1,cols-1);neighborX++)
             {
-                if(dontCheck[neighborY][neighborX] != 1)
+                if(wallStatus[neighborY][neighborX] != 1)
                 {
                     GridNode* neighbor = new GridNode;
                     neighbor->parent=current;
@@ -119,9 +119,9 @@ GridNode* PathPlanner::aStar(vector< vector<int> > grid, float gridResolution, f
                     {
                         neighbor->t_score+=sqrt(gridResolution*gridResolution*2);
                     }
-                    if (dontCheck[neighborY][neighborX] == 2)
+                    if (wallStatus[neighborY][neighborX] == 2)
                     {
-                        neighbor->t_score+=(gridResolution/2);
+                        neighbor->t_score+=gridResolution;
                     }
                     neighbor->g_score=neighbor->t_score+heuristic_cost_estimate(neighbor->place,goal);
                     if(gCheck[neighborY][neighborX] == -1)
@@ -168,4 +168,9 @@ void PathPlanner::painPath(Map m, GridNode* gn)
         gn = gn->parent;
     }
     m.saveImage("MapWithPath.png",newImage,m.getWidth(),m.getHeight());
+}
+
+GridNode* PathPlanner::getGoalNode()
+{
+    return _goalNode;
 }

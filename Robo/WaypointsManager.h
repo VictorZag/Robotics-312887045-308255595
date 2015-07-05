@@ -8,13 +8,15 @@
 #ifndef WAYPOINTSMANAGER_H
 #define	WAYPOINTSMANAGER_H
 
+#include "PathPlanner.h"
+
 class WaypointsManager {
 public:
-    WaypointsManager();
+    WaypointsManager(GridNode* end, int startX, int startY);
     WaypointsManager(const WaypointsManager& orig);
     virtual ~WaypointsManager();
 private:
-
+    vector<Location> _waypoints;
 };
 
 #endif	/* WAYPOINTSMANAGER_H */
