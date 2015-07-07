@@ -99,6 +99,14 @@ void Map::createGrid(float gridResolutionPix)
         _grid.push_back(gridRow);
     }
 }
+unsigned int Map::gridFromPix(float index)
+{
+    return floor(index / getGridResolutionPix());
+}
+float Map::pixFromGrid(unsigned int index)
+{
+    return index * getGridResolutionPix() + getGridResolutionPix() / 2;
+}
 unsigned Map::getWidth()
 {
     return _width;

@@ -38,6 +38,8 @@ public:
     Map(const Map& orig);
     virtual ~Map();
     void saveImage(const char* filename, std::vector<unsigned char>& image ,unsigned width, unsigned height);
+    unsigned int gridFromPix(float index);
+    float pixFromGrid(unsigned int index);
     unsigned getWidth();
     unsigned getHeight();
     vector<unsigned char> getImage();

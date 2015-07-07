@@ -13,6 +13,7 @@
       <itemPath>Particle.h</itemPath>
       <itemPath>PathPlanner.h</itemPath>
       <itemPath>Robot.h</itemPath>
+      <itemPath>Turn.h</itemPath>
       <itemPath>WaypointsManager.h</itemPath>
       <itemPath>lodepng.h</itemPath>
     </logicalFolder>
@@ -32,6 +33,7 @@
       <itemPath>Particle.cpp</itemPath>
       <itemPath>PathPlanner.cpp</itemPath>
       <itemPath>Robot.cpp</itemPath>
+      <itemPath>Turn.cpp</itemPath>
       <itemPath>WaypointsManager.cpp</itemPath>
       <itemPath>lodepng.cpp</itemPath>
       <itemPath>main.cpp</itemPath>
@@ -109,6 +111,10 @@
       </item>
       <item path="Robot.h" ex="false" tool="3" flavor2="0">
       </item>
+      <item path="Turn.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="Turn.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="WaypointsManager.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="WaypointsManager.h" ex="false" tool="3" flavor2="0">
@@ -175,6 +181,10 @@
       <item path="Robot.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="Robot.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Turn.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="Turn.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="WaypointsManager.cpp" ex="false" tool="1" flavor2="0">
       </item>

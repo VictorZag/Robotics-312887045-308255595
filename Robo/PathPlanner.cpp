@@ -8,7 +8,7 @@
 #include "PathPlanner.h"
 
 PathPlanner::PathPlanner(Map m) {
-    _goalNode = aStar(m.getGrid(), m.geGridResolution(), floor(m.getStartLocationX()/m.getGridResolutionPix()), floor(m.getStartLocationY()/m.getGridResolutionPix()), floor(m.getGoalLocationX()/m.getGridResolutionPix()), floor(m.getGoalLocationY()/m.getGridResolutionPix()));
+    _goalNode = aStar(m.getGrid(), m.geGridResolution(), m.gridFromPix(m.getStartLocationX()), m.gridFromPix(m.getStartLocationY()), m.gridFromPix(m.getGoalLocationX()), m.gridFromPix(m.getGoalLocationY()));
     painPath(m, _goalNode);
 }
 
@@ -150,8 +150,8 @@ void PathPlanner::painPath(Map m, GridNode* gn)
 {
     vector<unsigned char> newImage = m.getImage();
     float gridResPix = m.getGridResolutionPix();
-    float targetX = floor(m.getStartLocationX()/gridResPix);
-    float targetY = floor(m.getStartLocationY()/gridResPix);
+    float targetX = m.gridFromPix(m.getStartLocationX());
+    float targetY = m.gridFromPix(m.getStartLocationY());
     while (gn->place.x!=targetX || gn->place.y!=targetY)
     {
         for (int i =gn->place.y*gridResPix; i<(gn->place.y+1)*gridResPix;i++)

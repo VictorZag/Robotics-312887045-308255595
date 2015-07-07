@@ -44,6 +44,7 @@ OBJECTFILES= \
 	${OBJECTDIR}/Particle.o \
 	${OBJECTDIR}/PathPlanner.o \
 	${OBJECTDIR}/Robot.o \
+	${OBJECTDIR}/Turn.o \
 	${OBJECTDIR}/WaypointsManager.o \
 	${OBJECTDIR}/lodepng.o \
 	${OBJECTDIR}/main.o
@@ -117,6 +118,11 @@ ${OBJECTDIR}/Robot.o: Robot.cpp
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
 	$(COMPILE.cc) -g -I/usr/local/include/player-2.0 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Robot.o Robot.cpp
+
+${OBJECTDIR}/Turn.o: Turn.cpp 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} "$@.d"
+	$(COMPILE.cc) -g -I/usr/local/include/player-2.0 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Turn.o Turn.cpp
 
 ${OBJECTDIR}/WaypointsManager.o: WaypointsManager.cpp 
 	${MKDIR} -p ${OBJECTDIR}
