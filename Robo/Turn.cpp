@@ -6,6 +6,7 @@
  */
 
 #include "Turn.h"
+#define ANGLE 1
 
 Turn::Turn(Robot *robot) : Behavior(robot){
 }
@@ -23,7 +24,7 @@ bool Turn::stopCond()
 	return true;
 }
 
-void Turn::action(float angle)
+void Turn::action()
 {
-	_robot->setSpeed(0, angle);
+	_robot->setSpeed(0, ANGLE);
 }

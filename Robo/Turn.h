@@ -17,7 +17,7 @@ public:
     
     virtual bool startCond();
     virtual bool stopCond();
-    virtual void action(float angle);
+    virtual void action();
 private:
 
 };

@@ -1,3 +1,6 @@
+#ifndef BEHAVIOR_H_
+#define BEHAVIOR_H_
+
 #include "Robot.h"
 #include <vector>
 using namespace std;
@@ -20,3 +23,5 @@ public:
     Behavior(Robot *robot);
     virtual ~Behavior();
 };
+
+#endif /* BEHAVIOR_H_ */
