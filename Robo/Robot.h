@@ -8,6 +8,7 @@
 #ifndef ROBOT_H_
 #define ROBOT_H_
 
+#include "ConfigurationManager.h"
 #include <libplayerc++/playerc++.h>
 #include <string>
 using namespace PlayerCc;
@@ -21,7 +22,7 @@ private:
 	float _lastX, _lastY, _lastYaw;
 
 public:
-	Robot(string ip, int port);
+	Robot(char* p_filePath,string ip, int port);
 	virtual ~Robot();
 
 	void setSpeed(float linear, float angular);
@@ -31,6 +32,7 @@ public:
 
 	float* getLaserScan();
 	int deg_to_index(double deg);
+        void read();
 };
 
 #endif /* ROBOT_H_ */

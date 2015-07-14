@@ -6,10 +6,18 @@
  */
 
 #include "Robot.h"
+#define PI 3.14159265
 
-Robot::Robot(string ip, int port) : _pc(ip, port), _pp(&_pc), _lp(&_pc) {
+Robot::Robot(char* p_filePath,string ip, int port) : _pc(ip, port), _pp(&_pc), _lp(&_pc) {
 	// TODO Auto-generated constructor stub
-	_lastX = _pp.GetXPos();
+        ConfigurationManager* cm = new ConfigurationManager(p_filePath);
+        _pp.SetMotorEnable(true);
+        _pp.SetOdometry(cm->GetStartLocationX(),-cm->GetStartLocationY()/4,dtor(cm->GetStartAngle()));
+        for(int i = 0; i < 20 ; i++)
+        {
+            _pc.Read();
+        }
+        _lastX = _pp.GetXPos();
 	_lastY = _pp.GetYPos();
 	_lastYaw = _pp.GetYaw();
 }
@@ -50,5 +58,10 @@ float* Robot::getLaserScan()
 
 int Robot::deg_to_index(double deg)
 {
-	return (deg + 120) / 0.36;
+    return (deg + 120) / 0.36;
+}
+
+void Robot::read()
+{
+    _pc.Read();
 }

@@ -49,4 +49,8 @@ void WaypointsManager::remWaypoint()
 {
     _waypoints.erase(_waypoints.begin()+_waypoints.size()-1);
 }
+int WaypointsManager::getWaypointCount()
+{
+    return _waypoints.size();
+}
 

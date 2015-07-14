@@ -18,6 +18,7 @@ public:
     Location getWaypoint();
     Location getPrevWaypoint();
     void remWaypoint();
+    int getWaypointCount();
 private:
     vector<Location> _waypoints;
 };
