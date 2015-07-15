@@ -12,6 +12,13 @@
 
 #include <vector>
 #include <queue>
+#include <algorithm>
+#include <sstream>
+#include <iostream>
+#include <iterator>
+#include <numeric>
+#include <cassert>
+#include <cmath>
 
 #include "Particle.h"
 
@@ -23,11 +30,17 @@ public:
     LocalizationManager(const LocalizationManager& orig);
     virtual ~LocalizationManager();
     
+       
+//    void Resample();
     void Update(long deltaX, long deltaY, long deltaYaw, float* laserArr);
-private:
     
+    
+    
+private:
+//    double SumParticleBelief();
+    bool cmp(Particle a, Particle b);
     /*Particle _particles[PART_COUNT];*/
-    vector<Particle> _particles;
+    vector<Particle*> _particles;
     
 
 };

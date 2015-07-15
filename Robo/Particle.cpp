@@ -5,9 +5,14 @@
  * Created on June 26, 2015, 2:52 AM
  */
 
+
 #include "Particle.h"
 
-Particle::Particle() {
+Particle::Particle(long x, long y, long yaw, double belief) {
+    this->_x = x;
+    this->_y = y;
+    this->_yaw = yaw;
+    this->_belief = belief;
 }
 
 Particle::Particle(const Particle& orig) {
@@ -24,10 +29,10 @@ void Particle::Update(long deltaX, long deltaY, long deltaYaw, float* laserArr)
     
     long predBelief = _belief * ProbByMove(deltaX, deltaY, deltaYaw);
     
-    _belief = 1.5 * predBelief * ProbByMeasurement();
+    _belief = 1.5 * predBelief * ProbByMeasurement(laserArr);
 }
 
-long Particle::ProbByMeasurement()
+long Particle::ProbByMeasurement(float* laserArr)
 {
     return 1;
 }
@@ -42,7 +47,21 @@ long Particle::ProbByMove(long deltaX, long deltaY, long deltaYaw)
     return 1;
 }
 
-long Particle::GetBelief()
+double Particle::GetBelief() const
 {
+    return _belief;
+}
+
+
+long Particle::GetX() const{
+    return _x;
+}
+long Particle::GetY() const{
+    return _y;
+}
+long Particle::GetYaw() const{
+    return _yaw;
+}
+double Particle::Getbelief() const{
     return _belief;
 }
