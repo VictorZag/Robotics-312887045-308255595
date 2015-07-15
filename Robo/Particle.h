@@ -9,21 +9,24 @@
 #ifndef PARTICLE_H
 #define	PARTICLE_H
 
+#include "Globals.h" 
+#include "Map.h"
+
 class Particle {
 public:
-    Particle(long x, long y, long yaw, double _belief);
+    Particle(float x, float y, float yaw, float _belief);
     Particle(const Particle& orig);
     virtual ~Particle();
     
-    void Update(long deltaX, long deltaY, long deltaYaw, float* laserArr);
+    void Update(float deltaX, float deltaY, float deltaYaw, float* laserArr);
     
-    long ProbByMeasurement(float* laserArr);
+    float ProbByMeasurement(float* laserArr);
     
     double GetBelief() const;
-    long GetX() const;
-    long GetY() const;
-    long GetYaw() const;
-    double Getbelief() const;
+    float GetX() const;
+    float GetY() const;
+    float GetYaw() const;
+    float Getbelief() const;
 
     bool operator<(const Particle& obj) const {
     return this->GetBelief() < obj.GetBelief();
@@ -33,12 +36,13 @@ public:
     
 private:
     
-    long _x;
-    long _y;
-    long _yaw;
-    double _belief;
+    float _x;
+    float _y;
+    float _yaw;
+    float _belief;
+    Map _currMap;
     
-    long ProbByMove(long deltaX, long deltaY, long deltaYaw);
+    long ProbByMove(float deltaX, float deltaY, float deltaYaw);
 
 };
 
