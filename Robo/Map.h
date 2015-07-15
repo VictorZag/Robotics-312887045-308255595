@@ -50,6 +50,7 @@ public:
     float getStartLocationY();
     float getGoalLocationX();
     float getGoalLocationY();
+    float calculateDis(float fromX, float fromY, float toX, float toY);
 };
 
 #endif	/* MAP_H */

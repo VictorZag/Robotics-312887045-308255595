@@ -37,3 +37,20 @@ WaypointsManager::WaypointsManager(const WaypointsManager& orig) {
 WaypointsManager::~WaypointsManager() {
 }
 
+Location WaypointsManager::getWaypoint()
+{
+    return (_waypoints[_waypoints.size()-2]);
+}
+Location WaypointsManager::getPrevWaypoint()
+{
+    return (_waypoints[_waypoints.size()-1]);
+}
+void WaypointsManager::remWaypoint()
+{
+    _waypoints.erase(_waypoints.begin()+_waypoints.size()-1);
+}
+int WaypointsManager::getWaypointCount()
+{
+    return _waypoints.size();
+}
+

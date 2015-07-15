@@ -17,9 +17,10 @@ public:
     
     virtual bool startCond();
     virtual bool stopCond();
-    virtual void action(float angle);
+    virtual void action();
+    void setAngle(float angl);
 private:
-
+    float _angle;
 };
 
 #endif	/* TURN_H */

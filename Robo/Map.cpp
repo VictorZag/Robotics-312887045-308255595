@@ -147,3 +147,9 @@ float Map::getGoalLocationY()
 {
     return _cm->GetGoalLocationY();
 }
+float Map::calculateDis(float fromX, float fromY, float toX, float toY)
+{
+    float dx = fromX-toX;
+    float dy = fromY-toY;
+    return sqrt(dx*dx+dy*dy);
+}
