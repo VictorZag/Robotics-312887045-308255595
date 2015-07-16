@@ -11,16 +11,18 @@
 
 #include "Globals.h" 
 #include "Map.h"
+#include "Robot.h"
+#include <math.h>       /* cos, sin */
 
 class Particle {
 public:
-    Particle(float x, float y, float yaw, float _belief);
+    Particle(float x, float y, float yaw, float belief, Map *map, Robot *robot);
     Particle(const Particle& orig);
     virtual ~Particle();
     
-    void Update(float deltaX, float deltaY, float deltaYaw, float* laserArr);
+    void Update(float deltaX, float deltaY, float deltaYaw);
     
-    float ProbByMeasurement(float* laserArr);
+    float ProbByMeasurement();
     
     double GetBelief() const;
     float GetX() const;
@@ -40,8 +42,8 @@ private:
     float _y;
     float _yaw;
     float _belief;
-    Map _currMap;
-    
+    Map *_currMap;
+    Robot *_robot;
     long ProbByMove(float deltaX, float deltaY, float deltaYaw);
 
 };

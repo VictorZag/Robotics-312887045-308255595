@@ -13,6 +13,8 @@
 #define RWY 39
 #define MIN_ANGLE -30
 #define MAX_ANGLE 30
+#define MAX_DIST_TO_OBSTACLE 0.5
+#define FORWARD_SPEED 0.1
 
 #endif	/* GLOBALS_H */
 
