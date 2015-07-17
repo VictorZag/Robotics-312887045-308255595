@@ -10,6 +10,7 @@
 
 #define PART_COUNT 200
 
+#include <stdlib.h>     /* srand, rand */
 #include <vector>
 #include <queue>
 #include <algorithm>
@@ -20,25 +21,27 @@
 #include <cassert>
 #include <cmath>
 
+
 #include "Particle.h"
 
 using namespace std;
 
 class LocalizationManager {
 public:
-    LocalizationManager();
+    LocalizationManager(Map *map, Robot *robot, WaypointsManager *wayPoint);
     LocalizationManager(const LocalizationManager& orig);
     virtual ~LocalizationManager();
     
        
 //    void Resample();
-    void Update(long deltaX, long deltaY, long deltaYaw, float* laserArr);
+    void Update(float deltaX, float deltaY, float deltaYaw, float* laserArr);
     
-    
+    float getRandom(float curr,float range);
     
 private:
 //    double SumParticleBelief();
     bool cmp(Particle a, Particle b);
+    
     /*Particle _particles[PART_COUNT];*/
     vector<Particle*> _particles;
     

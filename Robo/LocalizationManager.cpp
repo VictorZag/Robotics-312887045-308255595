@@ -9,7 +9,26 @@
 #include "LocalizationManager.h"
 
 
-LocalizationManager::LocalizationManager() {
+LocalizationManager::LocalizationManager(Map *map, Robot *robot, WaypointsManager *wayPoint) {
+    
+    float xRobot = robot->getX();
+    float yRobot = robot->getY();
+    float yawRobot = robot->getYaw();
+    
+    for (int i=0; i<PART_COUNT; i++)
+    {
+        float xParticle = getRandom(xRobot,RANGE_RANDOM);
+        float yParticle = getRandom(yRobot,RANGE_RANDOM);
+        float yawParticle = getRandom(yawRobot,PI);
+        Particle *newp = new Particle(xParticle,
+                                    yParticle,
+                                    yawParticle,
+                                    1,
+                                    map,
+                                    robot,
+                                    wayPoint);
+        _particles.push_back(newp);
+    }
 }
 
 LocalizationManager::LocalizationManager(const LocalizationManager& orig) {
@@ -63,12 +82,12 @@ return a.GetBelief() < b.GetBelief();}
 //    _particles.erase(_particles.begin(), _particles.begin()+N);
 //}
 
-void LocalizationManager::Update(long deltaX, long deltaY, long deltaYaw, float* laserArr)
+void LocalizationManager::Update(float deltaX, float deltaY, float deltaYaw, float* laserArr)
 {
     std::vector<Particle*>::iterator iter = _particles.begin();
     while (iter != _particles.end())
     {
-        (*iter)->Update(deltaX, deltaY, deltaYaw, laserArr);
+        (*iter)->Update(deltaX, deltaY, deltaYaw);
         if ((*iter)->GetBelief() < 0.5)
         {
             iter = _particles.erase(iter);
@@ -84,4 +103,10 @@ void LocalizationManager::Update(long deltaX, long deltaY, long deltaYaw, float*
         }
     }
 }
+
+float LocalizationManager::getRandom(float curr,float range)
+{
+    return ((range)*((float)rand()/RAND_MAX))*pow(-1,(int)rand())+curr;
+}
+
 

@@ -29,6 +29,8 @@ public:
 	float getX();
 	float getY();
 	float getYaw();
+        float getOldYaw();
+        void setOldYaw(float yaw);
 
 	float* getLaserScan();
 	int deg_to_index(double deg);

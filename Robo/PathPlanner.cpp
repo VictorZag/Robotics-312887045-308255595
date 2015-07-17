@@ -178,6 +178,17 @@ void PathPlanner::painPath(Map m, GridNode* gn)
             newImage[pix+3]=255;
         }
     }
+    for (int i =348; i<352;i++)
+    {
+        for (int j =390; j<394;j++)
+        {
+            int pix = ((i*m.getWidth())+j)*4;
+            newImage[pix]=0;
+            newImage[pix+1]=255;
+            newImage[pix+2]=0;
+            newImage[pix+3]=255;
+        }
+    }
     m.saveImage("MapWithPath.png",newImage,m.getWidth(),m.getHeight());
 }
 

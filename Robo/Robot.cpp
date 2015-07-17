@@ -53,6 +53,16 @@ float Robot::getYaw()
 	return _pp.GetYaw();
 }
 
+float Robot::getOldYaw()
+{
+	return _lastYaw;
+}
+
+void Robot::setOldYaw(float yaw)
+{
+	_lastYaw = yaw;
+}
+
 float* Robot::getLaserScan()
 {
 	float *scan = new float[_lp.GetCount()];

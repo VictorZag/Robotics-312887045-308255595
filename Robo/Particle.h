@@ -12,11 +12,14 @@
 #include "Globals.h" 
 #include "Map.h"
 #include "Robot.h"
+#include "WaypointsManager.h"
 #include <math.h>       /* cos, sin */
+#include <algorithm>    // std::swap
+
 
 class Particle {
 public:
-    Particle(float x, float y, float yaw, float belief, Map *map, Robot *robot);
+    Particle(float x, float y, float yaw, float belief, Map *map, Robot *robot, WaypointsManager *wayPoint);
     Particle(const Particle& orig);
     virtual ~Particle();
     
@@ -24,7 +27,7 @@ public:
     
     float ProbByMeasurement();
     
-    double GetBelief() const;
+    float GetBelief() const;
     float GetX() const;
     float GetY() const;
     float GetYaw() const;
@@ -44,7 +47,9 @@ private:
     float _belief;
     Map *_currMap;
     Robot *_robot;
-    long ProbByMove(float deltaX, float deltaY, float deltaYaw);
+    WaypointsManager *_wayPoint;
+    float ProbByMove(float deltaX, float deltaY, float deltaYaw);
+    LocationF Line( float x1,  float y1,  float x2,  float y2);
 
 };
 

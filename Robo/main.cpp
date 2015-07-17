@@ -15,6 +15,8 @@
 #include "WaypointsManager.h"
 #include "MoveForward.h"
 #include "Turn.h"
+#include "Particle.h"
+#include "LocalizationManager.h"
 
 #define PI 3.14159265
 #define RWX 38.2
@@ -29,7 +31,7 @@ int main()
         Map m((char*)"parameters.txt");
         PathPlanner p(m);
         WaypointsManager wm(p.getGoalNode(),m.gridFromPix(m.getStartLocationX()),m.gridFromPix(m.getStartLocationY()));
-        Robot* robot = new Robot((char*)"parameters.txt","10.10.245.64", 6665);
+        Robot* robot = new Robot((char*)"parameters.txt","localhost", 6665);
         
 //	Position2dProxy pp(&pc,0);
 //	//SonarProxy sp(&pc,0);
@@ -41,6 +43,7 @@ int main()
         Turn* tu=new Turn(robot);
         tu->setAngle(0.1);
         float dy,dx,deg;
+        LocalizationManager *locM = new LocalizationManager(&m,robot,&wm);
         while(wm.getWaypointCount() > 1)
         {
             robot->read();
@@ -79,6 +82,11 @@ int main()
                 std::cout << " now x " <<robot->getX() << " now y "<< robot->getY() << " dis " << m.calculateDis(robot->getX(),robot->getY(),m.pixFromGrid(wm.getWaypoint().x)/RWX,-m.pixFromGrid(wm.getWaypoint().y)/RWY) <<std::endl;
             }
             robot->setSpeed(0,0);
+            float dx = (m.pixFromGrid(wm.getWaypoint().x) - m.pixFromGrid(wm.getPrevWaypoint().x))/RWX;
+            float dy = (m.pixFromGrid(wm.getWaypoint().y) - m.pixFromGrid(wm.getPrevWaypoint().y))/RWY;
+            float dyaw = robot->getYaw() - robot->getOldYaw();
+            locM->Update(dx,dy,dyaw,robot->getLaserScan());
+            robot->setOldYaw(robot->getYaw());
             wm.remWaypoint();
         }
 	return 0;

@@ -153,3 +153,8 @@ float Map::calculateDis(float fromX, float fromY, float toX, float toY)
     float dy = fromY-toY;
     return sqrt(dx*dx+dy*dy);
 }
+
+float Map::getMapResolution()
+{
+    return _cm->GetMapResolutionCM();
+}
