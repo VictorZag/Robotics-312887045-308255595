@@ -8,6 +8,26 @@
 #ifndef MANAGER_H
 #define	MANAGER_H
 
+
+#include <libplayerc++/playerc++.h>
+#include <iostream>
+#include <unistd.h>
+#include "Robot.h"
+#include "lodepng.h"
+#include "Map.h"
+#include "PathPlanner.h"
+#include "WaypointsManager.h"
+#include "MoveForward.h"
+#include "Turn.h"
+#include "Particle.h"
+#include "LocalizationManager.h"
+#include "Globals.h";
+
+#define PI 3.14159265
+
+using namespace PlayerCc;
+using namespace std;
+
 class Manager {
 public:
     Manager();
