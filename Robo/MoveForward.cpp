@@ -10,7 +10,7 @@
 #define MIN_ANGLE -30
 #define MAX_ANGLE 30
 #define MAX_DIST_TO_OBSTACLE 0.5
-#define FORWARD_SPEED 0.1
+#define FORWARD_SPEED 0.5
 
 MoveForward::MoveForward(Robot *robot) : Behavior(robot) {
 	// TODO Auto-generated constructor stub

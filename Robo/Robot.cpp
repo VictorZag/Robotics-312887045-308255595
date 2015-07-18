@@ -7,14 +7,14 @@
 
 #include "Robot.h"
 #define PI 3.14159265
-#define RWX 38.2
-#define RWY 39
+#define RWX 40*550
+#define RWY 20*380
 
 Robot::Robot(char* p_filePath,string ip, int port) : _pc(ip, port), _pp(&_pc), _lp(&_pc) {
 	// TODO Auto-generated constructor stub
         ConfigurationManager* cm = new ConfigurationManager(p_filePath);
         _pp.SetMotorEnable(true);
-        _pp.SetOdometry(cm->GetStartLocationX()/RWX,-cm->GetStartLocationY()/RWY,dtor(cm->GetStartAngle()));
+        _pp.SetOdometry(cm->GetStartLocationX()/550*40,-cm->GetStartLocationY()/380*20,dtor(cm->GetStartAngle()));
         std::cout << dtor(cm->GetStartAngle())<<"          " <<getYaw() << std::endl;
         for(int i = 0; i < 20 ; i++)
         {
@@ -22,11 +22,11 @@ Robot::Robot(char* p_filePath,string ip, int port) : _pc(ip, port), _pp(&_pc), _
             std::cout << dtor(cm->GetStartAngle())<<"          " <<getYaw() << std::endl;
         }
         
-        _pp.SetOdometry(cm->GetStartLocationX()/RWX,-cm->GetStartLocationY()/RWY,dtor(cm->GetStartAngle()));
+        _pp.SetOdometry(cm->GetStartLocationX()/550*40,-cm->GetStartLocationY()/380*20,dtor(cm->GetStartAngle()));
         std::cout << dtor(cm->GetStartAngle())<<"          " <<getYaw() << std::endl;
-        _lastX = _pp.GetXPos();
-	_lastY = _pp.GetYPos();
-	_lastYaw = _pp.GetYaw();
+        _lastX = getX();
+	_lastY = getY();
+	_lastYaw = getYaw();
 }
 
 Robot::~Robot() {
@@ -40,12 +40,12 @@ void Robot::setSpeed(float linear, float angular)
 
 float Robot::getX()
 {
-	return _pp.GetXPos();
+	return _pp.GetXPos()/40*550 +9;
 }
 
 float Robot::getY()
 {
-	return _pp.GetYPos();
+	return _pp.GetYPos()/20*380;
 }
 
 float Robot::getYaw()
