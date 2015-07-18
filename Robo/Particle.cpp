@@ -185,3 +185,12 @@ float Particle::GetYaw() const{
 float Particle::Getbelief() const{
     return _belief;
 }
+Map* Particle::GetMap() const{
+    return _currMap;
+}
+Robot* Particle::GetRobot() const{
+    return _robot;
+}
+WaypointsManager* Particle::GetWayPoint() const{
+    return _wayPoint;
+}

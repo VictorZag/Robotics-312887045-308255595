@@ -36,6 +36,7 @@ OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 # Object Files
 OBJECTFILES= \
 	${OBJECTDIR}/Behavior.o \
+	${OBJECTDIR}/Common.o \
 	${OBJECTDIR}/ConfigurationManager.o \
 	${OBJECTDIR}/LocalizationManager.o \
 	${OBJECTDIR}/Manager.o \
@@ -78,6 +79,11 @@ ${OBJECTDIR}/Behavior.o: Behavior.cpp
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
 	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Behavior.o Behavior.cpp
+
+${OBJECTDIR}/Common.o: Common.cpp 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} "$@.d"
+	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Common.o Common.cpp
 
 ${OBJECTDIR}/ConfigurationManager.o: ConfigurationManager.cpp 
 	${MKDIR} -p ${OBJECTDIR}

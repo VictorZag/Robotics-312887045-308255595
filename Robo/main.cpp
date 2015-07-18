@@ -17,6 +17,7 @@
 #include "Turn.h"
 #include "Particle.h"
 #include "LocalizationManager.h"
+#include "Common.h"
 
 #define PI 3.14159265
 #define RWX 38.2
@@ -32,12 +33,12 @@ int main()
         PathPlanner p(m);
         WaypointsManager wm(p.getGoalNode(),m.gridFromPix(m.getStartLocationX()),m.gridFromPix(m.getStartLocationY()));
         Robot* robot = new Robot((char*)"parameters.txt","localhost", 6665);
-        
 //	Position2dProxy pp(&pc,0);
 //	//SonarProxy sp(&pc,0);
 //	IrProxy sp(&pc,0);
 
 //	pp.SetMotorEnable(true);
+       
         
         MoveForward* mf = new MoveForward(robot);
         Turn* tu=new Turn(robot);

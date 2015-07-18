@@ -32,6 +32,10 @@ public:
     float GetY() const;
     float GetYaw() const;
     float Getbelief() const;
+    Map* GetMap() const;
+    Robot* GetRobot() const;
+    WaypointsManager* GetWayPoint() const;
+
 
     bool operator<(const Particle& obj) const {
     return this->GetBelief() < obj.GetBelief();
