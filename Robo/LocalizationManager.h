@@ -39,17 +39,12 @@ public:
     float getRandom(float curr,float range);
     
 private:
-//    double SumParticleBelief();
-    //bool cmp1(const Particle& a,const Particle& b);
-    
-    /*Particle _particles[PART_COUNT];*/
     vector<Particle*> _particles;
     
 
 };
 
-bool cmp1(Particle* a, Particle* b){
-return a->GetBelief() > b->GetBelief();}
+
 
 #endif	/* LOCALIZATIONMANAGER_H */
 

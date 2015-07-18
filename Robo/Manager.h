@@ -21,9 +21,7 @@
 #include "Turn.h"
 #include "Particle.h"
 #include "LocalizationManager.h"
-#include "Globals.h";
-
-#define PI 3.14159265
+#include "Globals.h"
 
 using namespace PlayerCc;
 using namespace std;

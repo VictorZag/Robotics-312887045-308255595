@@ -5,7 +5,6 @@
                    displayName="Header Files"
                    projectFiles="true">
       <itemPath>Behavior.h</itemPath>
-      <itemPath>Common.h</itemPath>
       <itemPath>ConfigurationManager.h</itemPath>
       <itemPath>Globals.h</itemPath>
       <itemPath>LocalizationManager.h</itemPath>
@@ -27,7 +26,6 @@
                    displayName="Source Files"
                    projectFiles="true">
       <itemPath>Behavior.cpp</itemPath>
-      <itemPath>Common.cpp</itemPath>
       <itemPath>ConfigurationManager.cpp</itemPath>
       <itemPath>LocalizationManager.cpp</itemPath>
       <itemPath>Manager.cpp</itemPath>
@@ -92,10 +90,6 @@
       <item path="Behavior.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="Behavior.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="Common.cpp" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="Common.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="ConfigurationManager.cpp" ex="false" tool="1" flavor2="0">
       </item>
@@ -169,10 +163,6 @@
       <item path="Behavior.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="Behavior.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="Common.cpp" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="Common.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="ConfigurationManager.cpp" ex="false" tool="1" flavor2="0">
       </item>

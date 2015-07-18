@@ -36,11 +36,13 @@ LocalizationManager::LocalizationManager(const LocalizationManager& orig) {
 
 LocalizationManager::~LocalizationManager() {
 }
+bool cmp(Particle* a, Particle* b){
+return a->GetBelief() > b->GetBelief();}
 
 void LocalizationManager::Update(float deltaX, float deltaY, float deltaYaw, float* laserArr)
 {
     // sort, with low belief first
-    std::sort(_particles.begin(), _particles.end(), cmp1);
+    std::sort(_particles.begin(), _particles.end(), cmp);
     
     std::vector<Particle*>::iterator iter = _particles.begin();
     while (iter != _particles.end())

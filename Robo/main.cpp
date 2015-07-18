@@ -17,7 +17,6 @@
 #include "Turn.h"
 #include "Particle.h"
 #include "LocalizationManager.h"
-#include "Common.h"
 
 #define PI 3.14159265
 #define RWX 38.2
