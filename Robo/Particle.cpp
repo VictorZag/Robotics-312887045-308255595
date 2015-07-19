@@ -34,12 +34,14 @@ void Particle::Update(float deltaX, float deltaY, float deltaYaw)
     float predBelief = _belief * ProbByMove(abs(deltaX), abs(deltaY), deltaYaw);
     
     _belief = 1.5 * predBelief * ProbByMeasurement();
+    
+    int a =1 ;
 }
 
 float Particle::ProbByMeasurement()
 {
     // READ!!!
-    _robot->read();
+    
     float probResult = 0;
     float xObs, yObs;
     float robotYaw = _robot->getYaw();
@@ -58,7 +60,7 @@ float Particle::ProbByMeasurement()
               α – robot’s orientation
               β – angle of the sensor relative to the robot
               d – distance between the robot and the obstacle
-              xobs – x position of the obstacle
+              xobs – x position of the obpppstacle
               yobs – y position of the obstacle*/
 
           //xobs = xrob + d · cos(α + β)
@@ -83,9 +85,9 @@ float Particle::ProbByMeasurement()
           yObsImage =  round(roboY + -length * sin(angle));
 
           LocationF loc = Line(roboX, abs(roboY), xObsImage, abs(yObsImage));
-
-          probResult += ((MAX_LASER_DIST - abs(loc.x - xObs))/(MAX_LASER_DIST * 2))/maxIndex;
-          probResult += ((MAX_LASER_DIST - abs(loc.y - yObs))/(MAX_LASER_DIST * 2))/maxIndex;
+          float maxLaserDist = (float)MAX_LASER_DIST;
+          probResult += ((maxLaserDist - fabs(loc.x - xObs))/(maxLaserDist * 2))/((float)maxIndex);
+          probResult += ((maxLaserDist - fabs(loc.y - yObs))/(maxLaserDist * 2))/((float)maxIndex);
     }
     return probResult;
 }

@@ -41,6 +41,7 @@ return a->GetBelief() > b->GetBelief();}
 
 void LocalizationManager::Update(float deltaX, float deltaY, float deltaYaw, float* laserArr)
 {
+    
     // sort, with low belief first
     std::sort(_particles.begin(), _particles.end(), cmp);
     
@@ -49,7 +50,7 @@ void LocalizationManager::Update(float deltaX, float deltaY, float deltaYaw, flo
     {
         Particle* currPart = (*iter);
         currPart->Update(deltaX, deltaY, deltaYaw);
-        if ((*iter)->GetBelief() <= 0.5)
+        if (currPart->GetBelief() <= 0.5)
         {
             iter = _particles.erase(iter);
         }

@@ -85,6 +85,7 @@ int main()
             float dx = (m.pixFromGrid(wm.getWaypoint().x) - m.pixFromGrid(wm.getPrevWaypoint().x))/RWX;
             float dy = (m.pixFromGrid(wm.getWaypoint().y) - m.pixFromGrid(wm.getPrevWaypoint().y))/RWY;
             float dyaw = robot->getYaw() - robot->getOldYaw();
+            robot->read();
             locM->Update(dx,dy,dyaw,robot->getLaserScan());
             robot->setOldYaw(robot->getYaw());
             wm.remWaypoint();
