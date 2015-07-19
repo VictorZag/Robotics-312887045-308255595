@@ -26,7 +26,7 @@ Manager::Manager() {
         dx=m.pixFromGrid(wm.getPrevWaypoint().x)-m.pixFromGrid(wm.getWaypoint().x);
         if(dy>0)
         {
-            if(dx>0)
+            if(dx<0)
             {
                 deg = atan(dy/dx) ;
             }
@@ -37,7 +37,7 @@ Manager::Manager() {
         }
         else
         {
-            if(dx>0)
+            if(dx<0)
             {
                 deg = -atan(dy/dx) ;
             }
@@ -86,11 +86,11 @@ Manager::Manager() {
             std::cout << " now x " <<robot->getX() << " now y "<< robot->getY() << " dis " << m.calculateDis(robot->getX(),robot->getY(),m.pixFromGrid(wm.getWaypoint().x)/RWX,-m.pixFromGrid(wm.getWaypoint().y)/RWY) <<std::endl;
         }
         robot->setSpeed(0,0);
-        float dx = (m.pixFromGrid(wm.getWaypoint().x) - m.pixFromGrid(wm.getPrevWaypoint().x))/RWX;
-        float dy = (m.pixFromGrid(wm.getWaypoint().y) - m.pixFromGrid(wm.getPrevWaypoint().y))/RWY;
-        float dyaw = robot->getYaw() - robot->getOldYaw();
-        locM->Update(dx,dy,dyaw,robot->getLaserScan());
-        robot->setOldYaw(robot->getYaw());
+//        float dx = (m.pixFromGrid(wm.getWaypoint().x) - m.pixFromGrid(wm.getPrevWaypoint().x))/RWX;
+//        float dy = (m.pixFromGrid(wm.getWaypoint().y) - m.pixFromGrid(wm.getPrevWaypoint().y))/RWY;
+//        float dyaw = robot->getYaw() - robot->getOldYaw();
+//        locM->Update(dx,dy,dyaw,robot->getLaserScan());
+//        robot->setOldYaw(robot->getYaw());
         wm.remWaypoint();
     }
 }
